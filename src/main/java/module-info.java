@@ -4,6 +4,6 @@ module es.aketzagonzalez {
     requires javafx.media;
     requires java.sql;
     requires net.sf.jasperreports.core;
-    opens es.aketzagonzalez.jasperAgenda to javafx.fxml;
+    opens es.aketzagonzalez.controller to javafx.fxml;
     exports es.aketzagonzalez.jasperAgenda;
 }
