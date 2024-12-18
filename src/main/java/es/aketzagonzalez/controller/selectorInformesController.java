@@ -2,6 +2,8 @@ package es.aketzagonzalez.controller;
 
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import es.aketzagonzalez.db.ConexionBBDD;
 import javafx.event.ActionEvent;
@@ -56,6 +58,46 @@ public class selectorInformesController {
     			} catch (JRException e) {
     				e.printStackTrace();
     			}
+    	}else {
+    		if(radInformeCalculos.isSelected()) {
+    			try {
+    				ConexionBBDD db=new ConexionBBDD();
+    				InputStream reportStream =getClass().getResourceAsStream("/jasper/Agenda_InformePersonas_Calculos.jasper");
+    				if (reportStream == null) {
+    	                System.out.println("El archivo no esta ahí");
+    	            }else {
+    	                System.out.println("El archivo se ha encontrado");
+    	            }
+    	            JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
+    	            Map<String, Object> parameters = new HashMap<>();
+    	            parameters.put("IMAGE_PATH", db.getClass().getResource("/imagenes/").toString());
+    	            JasperPrint jprint = JasperFillManager.fillReport(report, parameters, db.getConnection());
+    	            JasperViewer viewer = new JasperViewer(jprint, false);
+    	            viewer.setVisible(true);
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			} catch (JRException e) {
+    				e.printStackTrace();
+    			}
+    		}else {
+    			try {
+    				ConexionBBDD db=new ConexionBBDD();
+    				InputStream reportStream =getClass().getResourceAsStream("/jasper/Agenda_InformePersonas_Subinforme.jasper");
+    				if (reportStream == null) {
+    	                System.out.println("El archivo no esta ahí");
+    	            }else {
+    	                System.out.println("El archivo se ha encontrado");
+    	            }
+    	            JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
+    	            JasperPrint jprint = JasperFillManager.fillReport(report, null, db.getConnection());
+    	            JasperViewer viewer = new JasperViewer(jprint, false);
+    	            viewer.setVisible(true);
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			} catch (JRException e) {
+    				e.printStackTrace();
+    			}
+    		}
     	}
     }
 
