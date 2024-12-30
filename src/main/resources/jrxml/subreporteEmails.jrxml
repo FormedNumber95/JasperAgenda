@@ -1,0 +1,48 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="subreporteTelefonos" language="java" columnCount="1" pageWidth="300" pageHeight="100" orientation="Landscape" columnWidth="260" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="652cd6e3-1bf7-41f3-916c-f956294240a6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="dni" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[SELECT email
+FROM agenda.email
+WHERE 
+	 agenda.email.dni =$P{dni}]]></query>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="email"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title splitType="Stretch"/>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="30" splitType="Stretch">
+		<element kind="staticText" uuid="23441c03-4110-4c3b-9022-d42c89473bec" mode="Opaque" x="-20" y="0" width="230" height="30" forecolor="#16748A" backcolor="#C4C4C4" fontSize="16.0" hTextAlign="Center" vTextAlign="Middle">
+			<printWhenExpression><![CDATA[$F{email}!=null]]></printWhenExpression>
+			<text><![CDATA[EMAIL]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<element kind="line" uuid="6f50979a-e5fe-453f-aa58-0acb025ca45f" x="-20" y="20" width="230" height="1">
+				<printWhenExpression><![CDATA[$F{email}!=null]]></printWhenExpression>
+			</element>
+			<element kind="textField" uuid="9044bad6-5926-4a29-bdc3-2f1a7fa2291d" x="-20" y="-1" width="230" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<printWhenExpression><![CDATA[$F{email}!=null]]></printWhenExpression>
+				<expression><![CDATA[$F{email}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d739fb3-a7c1-4c92-a970-8b5fce5e3488"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="1" splitType="Stretch"/>
+	<pageFooter height="1" splitType="Stretch"/>
+	<summary height="1" splitType="Stretch"/>
+</jasperReport>

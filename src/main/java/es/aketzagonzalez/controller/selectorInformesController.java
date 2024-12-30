@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import es.aketzagonzalez.db.ConexionBBDD;
+import es.aketzagonzalez.jasperAgenda.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,26 +19,40 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+/**
+ * The Class selectorInformesController.
+ */
 public class selectorInformesController {
 
+    /** The btn aceptar. */
     @FXML
     private Button btnAceptar;
 
+    /** The btn cancelar. */
     @FXML
     private Button btnCancelar;
 
+    /** The grupo iformes. */
     @FXML
     private ToggleGroup grupoIformes;
 
+    /** The rad informe calculos. */
     @FXML
     private RadioButton radInformeCalculos;
 
+    /** The rad informe simple. */
     @FXML
     private RadioButton radInformeSimple;
 
+    /** The rad informe subinforme. */
     @FXML
     private RadioButton radInformeSubinforme;
 
+    /**
+     * Boton aceptar que lanza el reporte seleccionado.
+     *
+     * @param event the event
+     */
     @FXML
     void accionAceptar(ActionEvent event) {
     	if(radInformeSimple.isSelected()) {
@@ -89,7 +104,9 @@ public class selectorInformesController {
     	                System.out.println("El archivo se ha encontrado");
     	            }
     	            JasperReport report = (JasperReport) JRLoader.loadObject(reportStream);
-    	            JasperPrint jprint = JasperFillManager.fillReport(report, null, db.getConnection());
+    	            Map<String, Object> parameters = new HashMap<>();
+    	            parameters.put("Resource_PATH", db.getClass().getResource("/jasper/").toString());
+    	            JasperPrint jprint = JasperFillManager.fillReport(report, parameters, db.getConnection());
     	            JasperViewer viewer = new JasperViewer(jprint, false);
     	            viewer.setVisible(true);
     			} catch (SQLException e) {
@@ -101,9 +118,14 @@ public class selectorInformesController {
     	}
     }
 
+    /**
+     * Accion cancelar.
+     *
+     * @param event the event
+     */
     @FXML
     void accionCancelar(ActionEvent event) {
-
+    	MainApp.getStage().close();
     }
 
 }

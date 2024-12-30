@@ -1,0 +1,70 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Agenda_InformePersonas_Subinforme" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b306e628-9d37-4ed9-9d3c-986ee3942996">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexionMariaIntento2"/>
+	<parameter name="Resource_PATH" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[SELECT 
+	p.dni,
+    p.nombre,
+    p.apellido1,
+    p.apellido2
+FROM 
+    agenda.persona p]]></query>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="c9ff0e0e-dc67-4fef-a343-5d97a661ad6f" mode="Opaque" x="-20" y="0" width="595" height="79" forecolor="#FFFFFF" backcolor="#16748A" fontSize="26.0" bold="true" vTextAlign="Middle">
+			<paragraph leftIndent="5"/>
+			<text><![CDATA[AGENDA]]></text>
+			<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+			<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+		</element>
+	</title>
+	<pageHeader height="11" splitType="Stretch"/>
+	<columnHeader height="16" splitType="Stretch"/>
+	<detail>
+		<band height="221" splitType="Stretch">
+			<element kind="textField" uuid="edbcb872-e119-482d-9ea7-b6388c3bb2b1" x="0" y="10" width="310" height="20" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$F{nombre}+" "+$F{apellido1}+" "+$F{apellido2}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0a9fba30-bbcb-4f79-b24a-1ce430e6f26c"/>
+			</element>
+			<element kind="line" uuid="6c0c423d-632e-4e3a-b4dd-4bafdadb8354" x="0" y="30" width="550" height="1"/>
+			<element kind="subreport" uuid="702b3211-8e9f-49df-ae7d-788397fd25a0" x="310" y="31" width="240" height="179">
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<expression><![CDATA[$P{Resource_PATH}+"subreporteTelefonos.jasper"]]></expression>
+				<parameter name="dni">
+					<expression><![CDATA[$F{dni}]]></expression>
+				</parameter>
+			</element>
+			<element kind="subreport" uuid="a0d7023e-cf0a-4b62-9ace-8ed9829b304f" x="20" y="31" width="280" height="180">
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<expression><![CDATA[$P{Resource_PATH}+"subreporteEmails.jasper"]]></expression>
+				<parameter name="dni">
+					<expression><![CDATA[$F{dni}]]></expression>
+				</parameter>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>
